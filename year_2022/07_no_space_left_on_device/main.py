@@ -19,7 +19,7 @@ def compute_folders_size(filename):
         if line.startswith("$ ls"):
             # List directory : noop
             continue
-        elif line.startswith("$ cd"):
+        if line.startswith("$ cd"):
             # New directory : update the current path
             update_path(current_path, line[5:])
         else:
