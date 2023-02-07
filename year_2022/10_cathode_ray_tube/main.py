@@ -47,7 +47,7 @@ def part2(filename):
             incr_cycle()
             x += int(instruction[-1])
 
-    return "\n".join(map(lambda row: "".join(row), crt))
+    return "\n".join(map("".join, crt))
 
 
 def main(filename):
