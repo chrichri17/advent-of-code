@@ -1,13 +1,16 @@
 import numpy as np
 
 
-def parse_inputs(filename):
-    get_row = lambda row: list(map(int, row))
-    return list(map(get_row, open(filename).read().splitlines()))
+def parse_inputs(filepath):
+    heightmap = []
+    with open(filepath) as file:
+        for line in file.readlines():
+            heightmap.append(list(map(int, list(line.strip()))))
+    return heightmap
 
 
-def part1(filename):
-    tree_map = np.array(parse_inputs(filename))
+def part1(filepath):
+    tree_map = np.array(parse_inputs(filepath))
     n, m = tree_map.shape
     nb_visible = 2 * (n + m - 2)
 
@@ -24,8 +27,8 @@ def part1(filename):
     return nb_visible
 
 
-def part2(filename):
-    tree_map = np.array(parse_inputs(filename))
+def part2(filepath):
+    tree_map = np.array(parse_inputs(filepath))
     n, m = tree_map.shape
     max_scenic_score = 0
 
@@ -60,6 +63,6 @@ def part2(filename):
     return max_scenic_score
 
 
-def main(filename):
-    print("Part 1:", part1(filename))
-    print("Part 2:", part2(filename))
+def main(filepath):
+    print("Part 1:", part1(filepath))
+    print("Part 2:", part2(filepath))

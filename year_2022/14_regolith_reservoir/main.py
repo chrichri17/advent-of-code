@@ -3,8 +3,8 @@ from typing import Generator
 Path = list[tuple[int, int]]
 
 
-def read_inputs(filename: str) -> Generator[Path, None, None]:
-    with open(filename) as file:
+def read_inputs(filepath: str) -> Generator[Path, None, None]:
+    with open(filepath) as file:
         for line in file.readlines():
             yield list(map(lambda s: tuple(map(int, s.split(","))), line.split(" -> ")))
 
@@ -85,8 +85,8 @@ def drop_sand_until_stability(
     return sand_units
 
 
-def main(filename):
-    paths = list(read_inputs(filename))
+def main(filepath):
+    paths = list(read_inputs(filepath))
     rocks, y_max = parse_inputs(paths)
     print("Part 1:", drop_sand_until_abyss(rocks, y_max))
     print("Part 2:", drop_sand_until_stability(rocks, y_max + 2))

@@ -20,8 +20,8 @@ class Monkey:
         return item % self.divisibility_factor == 0
 
 
-def read_inputs(filename):
-    with open(filename) as file:
+def read_inputs(filepath):
+    with open(filepath) as file:
         for monkey_params in file.read().split("\n\n"):
             lines = monkey_params.splitlines()
 
@@ -59,8 +59,8 @@ def track_most_active(monkeys: List[Monkey], normalize_wl: Operation, nb_run: in
     return counts[-1] * counts[-2]
 
 
-def main(filename):
-    monkeys: list[Monkey] = list(read_inputs(filename))
+def main(filepath):
+    monkeys: list[Monkey] = list(read_inputs(filepath))
 
     normalize_wl = lambda x: x // 3
     print("Part 1:", track_most_active(deepcopy(monkeys), normalize_wl, nb_run=20))

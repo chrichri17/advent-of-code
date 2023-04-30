@@ -1,13 +1,13 @@
-def read_inputs(filename):
-    with open(filename) as file:
+def read_inputs(filepath):
+    with open(filepath) as file:
         for line in file.readlines():
             x, y = line.strip().split()
             yield ord(x) - ord("A"), ord(y) - ord("X")
 
 
-def part1(filename):
+def part1(filepath):
     score = 0
-    for foe, me in read_inputs(filename):
+    for foe, me in read_inputs(filepath):
         # Score of the selected shape
         score += me + 1
 
@@ -20,9 +20,9 @@ def part1(filename):
     return score
 
 
-def part2(filename):
+def part2(filepath):
     score = 0
-    for foe, outcome in read_inputs(filename):
+    for foe, outcome in read_inputs(filepath):
         # Round outcome : 0 if we lose; 3 if it's a draw and 6 else
         score += 3 * outcome
 
@@ -34,6 +34,6 @@ def part2(filename):
     return score
 
 
-def main(filename):
-    print("Part 1:", part1(filename))
-    print("Part 2:", part2(filename))
+def main(filepath):
+    print("Part 1:", part1(filepath))
+    print("Part 2:", part2(filepath))

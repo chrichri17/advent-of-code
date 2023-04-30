@@ -2,10 +2,10 @@ import re
 from collections import deque, defaultdict
 
 
-def read_inputs(filename):
+def read_inputs(filepath):
     stacks = defaultdict(deque)
 
-    with open(filename) as file:
+    with open(filepath) as file:
         while True:
             line = file.readline().rstrip()
             if line[-1].isdigit():
@@ -30,11 +30,11 @@ def read_inputs(filename):
             yield amount, i, j
 
 
-def crate_mover(filename, version=9000):
+def crate_mover(filepath, version=9000):
     if version not in {9000, 9001}:
         raise ValueError(f"unknown version {version}")
 
-    inputs = read_inputs(filename)
+    inputs = read_inputs(filepath)
     stacks = next(inputs)
 
     for amount, i, j in inputs:
@@ -59,6 +59,6 @@ def crate_mover(filename, version=9000):
     return "".join(tops)
 
 
-def main(filename):
-    print("Part 1:", crate_mover(filename, version=9000))
-    print("Part 2:", crate_mover(filename, version=9001))
+def main(filepath):
+    print("Part 1:", crate_mover(filepath, version=9000))
+    print("Part 2:", crate_mover(filepath, version=9001))

@@ -7,8 +7,8 @@ Packet = list[PacketData]
 Pair = tuple[Packet, Packet]
 
 
-def get_packets_pairs(filename) -> Generator[Pair, None, None]:
-    with open(filename) as file:
+def get_packets_pairs(filepath) -> Generator[Pair, None, None]:
+    with open(filepath) as file:
         for pair in file.read().strip().split("\n\n"):
             yield tuple(map(eval, pair.split("\n")))
 
@@ -56,7 +56,7 @@ def get_decoder_key(pairs: list[Pair]) -> int:
     return i0 * j0
 
 
-def main(filename):
-    pairs = list(get_packets_pairs(filename))
+def main(filepath):
+    pairs = list(get_packets_pairs(filepath))
     print("Part 1:", sum(get_ordered_pairs(pairs)))
     print("Part 2:", get_decoder_key(pairs))

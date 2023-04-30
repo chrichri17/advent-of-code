@@ -6,12 +6,12 @@ Heightmap = list[list[str]]
 Square = tuple[int, int]
 
 
-def read_inputs(filename: str) -> tuple[Heightmap, Square, Square]:
+def read_inputs(filepath: str) -> tuple[Heightmap, Square, Square]:
     heightmap = []
     source: Square = None
     target: Square = None
 
-    with open(filename) as file:
+    with open(filepath) as file:
         for i, line in enumerate(file.readlines()):
             heightmap.append(list(line.strip()))
             for j, square in enumerate(heightmap[-1]):
@@ -71,7 +71,7 @@ def shortest_path_steps(
     return -1
 
 
-def main(filename: str):
-    heightmap, source, target = read_inputs(filename)
+def main(filepath: str):
+    heightmap, source, target = read_inputs(filepath)
     print("Part 1:", shortest_path_steps(heightmap, source, target))
     print("Part 2:", shortest_path_steps(heightmap, target, "a"))

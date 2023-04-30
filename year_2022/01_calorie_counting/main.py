@@ -1,11 +1,11 @@
 NB_TOP_ELVES = 3
 
 
-def get_max_calories(filename):
+def get_max_calories(filepath):
     max_calories = set()
     curr_calories = 0
 
-    with open(filename) as file:
+    with open(filepath) as file:
         for calories in file.readlines():
             if calories == "\n":
                 max_calories.add(curr_calories)
@@ -18,7 +18,7 @@ def get_max_calories(filename):
     return max_calories
 
 
-def main(filename):
-    max_calories = get_max_calories(filename)
+def main(filepath):
+    max_calories = get_max_calories(filepath)
     print("Part 1:", max(max_calories))
     print("Part 2:", sum(max_calories))

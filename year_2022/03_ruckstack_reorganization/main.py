@@ -3,10 +3,10 @@ from string import ascii_letters
 PRIORITY = {s: i + 1 for i, s in enumerate(ascii_letters)}
 
 
-def part1(filename):
+def part1(filepath):
     priorities_sum = 0
 
-    with open(filename) as file:
+    with open(filepath) as file:
         for line in file.readlines():
             mid = len(line) // 2
             uniques = set(line[:mid]).intersection(line[mid:])
@@ -19,10 +19,10 @@ def part1(filename):
     return priorities_sum
 
 
-def part2(filename):
+def part2(filepath):
     priorities_sum = 0
 
-    with open(filename) as file:
+    with open(filepath) as file:
         lines = file.readlines()
 
         for i in range(len(lines) // 3):
@@ -40,6 +40,6 @@ def part2(filename):
     return priorities_sum
 
 
-def main(filename):
-    print("Part 1:", part1(filename))
-    print("Part 2:", part2(filename))
+def main(filepath):
+    print("Part 1:", part1(filepath))
+    print("Part 2:", part2(filepath))

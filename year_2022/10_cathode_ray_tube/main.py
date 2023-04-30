@@ -1,13 +1,13 @@
 CYCLES = {20, 60, 100, 140, 180, 220}
 
 
-def read_inputs(filename):
-    with open(filename) as file:
+def read_inputs(filepath):
+    with open(filepath) as file:
         for line in file.readlines():
             yield line.strip().split()
 
 
-def part1(filename):
+def part1(filepath):
     x = 1
     cycle = 0
     signal_strength_sum = 0
@@ -18,7 +18,7 @@ def part1(filename):
         if cycle in CYCLES:
             signal_strength_sum += x * cycle
 
-    for instruction in read_inputs(filename):
+    for instruction in read_inputs(filepath):
         incr_cycle()
 
         if len(instruction) == 2:
@@ -28,7 +28,7 @@ def part1(filename):
     return signal_strength_sum
 
 
-def part2(filename):
+def part2(filepath):
     x = 1
     cycle = 0
     crt = [["  " for _ in range(40)] for _ in range(6)]
@@ -40,7 +40,7 @@ def part2(filename):
         if x % 40 <= cycle % 40 < x % 40 + 3:
             crt[p][q] = "##"
 
-    for instruction in read_inputs(filename):
+    for instruction in read_inputs(filepath):
         incr_cycle()
 
         if len(instruction) == 2:
@@ -50,6 +50,6 @@ def part2(filename):
     return "\n".join(map("".join, crt))
 
 
-def main(filename):
-    print("Part 1:", part1(filename))
-    print("Part 2:", part2(filename), sep="\n")
+def main(filepath):
+    print("Part 1:", part1(filepath))
+    print("Part 2:", part2(filepath), sep="\n")

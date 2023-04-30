@@ -7,8 +7,8 @@ class Motion:
     distance: int
 
 
-def read_inputs(filename):
-    with open(filename) as file:
+def read_inputs(filepath):
+    with open(filepath) as file:
         for line in file.readlines():
             direction, distance = line.strip().split()
             distance = int(distance)
@@ -90,13 +90,13 @@ class Rope:
         return self.knots[i]
 
 
-def simulate_motion(filename, nb_knots=2):
+def simulate_motion(filepath, nb_knots=2):
     rope = Rope(nb_knots)
-    for motion in read_inputs(filename):
+    for motion in read_inputs(filepath):
         rope.move(motion)
     return rope.count_visited
 
 
-def main(filename):
-    print("Part 1:", simulate_motion(filename, nb_knots=2))
-    print("Part 2:", simulate_motion(filename, nb_knots=10))
+def main(filepath):
+    print("Part 1:", simulate_motion(filepath, nb_knots=2))
+    print("Part 2:", simulate_motion(filepath, nb_knots=10))

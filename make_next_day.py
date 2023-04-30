@@ -24,13 +24,13 @@ files = [
 ]
 
 main_template = """
-def read_inputs(filename):
-    with open(filename) as file:
+def read_inputs(filepath):
+    with open(filepath) as file:
         for line in file.readlines():
             yield line.strip()
 
 
-def main(filename):
+def main(filepath):
     print("Part 1:", )
     print("Part 2:", )
 """

@@ -11,11 +11,11 @@ def update_path(curr_path, dir_name):
     curr_path.append(dir_name)
 
 
-def compute_folders_size(filename):
+def compute_folders_size(filepath):
     folders_size = defaultdict(int)
     current_path = []
 
-    for line in open(filename).read().splitlines():
+    for line in open(filepath).read().splitlines():
         if line.startswith("$ ls"):
             # List directory : noop
             continue
@@ -44,8 +44,8 @@ def compute_folders_size(filename):
 MAX_SIZE = 100_000
 
 
-def part1(filename):
-    folders_size = compute_folders_size(filename)
+def part1(filepath):
+    folders_size = compute_folders_size(filepath)
     # Get sum of folders having size < MAX_SIZE
     return sum(filter(lambda size: size < MAX_SIZE, folders_size.values()))
 
@@ -55,8 +55,8 @@ TOTAL_DISK_SPACE = 70_000_000
 REQUIRED_FREE_SPACE = 30_000_000
 
 
-def part2(filename):
-    folders_size = compute_folders_size(filename)
+def part2(filepath):
+    folders_size = compute_folders_size(filepath)
     total_space_used = folders_size.get("/")
     free_space_on_disk = TOTAL_DISK_SPACE - total_space_used
     needed_space = REQUIRED_FREE_SPACE - free_space_on_disk
@@ -68,6 +68,6 @@ def part2(filename):
     return min(map(lambda f: folders_size[f], deletable_folders))
 
 
-def main(filename):
-    print("Part 1:", part1(filename))
-    print("Part 2:", part2(filename))
+def main(filepath):
+    print("Part 1:", part1(filepath))
+    print("Part 2:", part2(filepath))

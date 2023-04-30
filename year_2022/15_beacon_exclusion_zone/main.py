@@ -2,10 +2,10 @@ import re
 from typing import Generator
 
 
-def read_inputs(filename) -> Generator[tuple[int], None, None]:
+def read_inputs(filepath) -> Generator[tuple[int], None, None]:
     pattern = "-?\d+"
 
-    with open(filename) as file:
+    with open(filepath) as file:
         for line in file.readlines():
             yield tuple(map(int, re.findall(pattern, line)))
 
@@ -67,10 +67,10 @@ def find_distress_beacon_freq(inputs: list[tuple[int]], limit: int) -> int:
         return COEF * (hi + 1) + y
 
 
-def main(filename):
-    inputs = list(read_inputs(filename))
+def main(filepath):
+    inputs = list(read_inputs(filepath))
     lineno = 10
-    if filename.name.startswith("in"):
+    if filepath.name.startswith("in"):
         lineno = 2_000_000
     limit = lineno * 2
     print("Part 1:", count_impossible_spots(inputs, lineno))
