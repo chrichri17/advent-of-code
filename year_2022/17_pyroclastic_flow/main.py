@@ -27,8 +27,8 @@ class Rock:
         for i, shape in enumerate(self):
             self[i] = shape[0] + PADX, shape[1] + PADY + ymax + 1
 
-    def move(self, gas_push: str, occupied: set[Shape]) -> bool:
-        if gas_push == "<":
+    def move(self, gas_jet: str, occupied: set[Shape]) -> bool:
+        if gas_jet == "<":
             self.move_left(occupied)
         else:
             self.move_right(occupied)
