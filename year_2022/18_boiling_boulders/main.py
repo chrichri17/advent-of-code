@@ -1,4 +1,3 @@
-from collections import deque
 from typing import Generator
 
 Cube = tuple[int, int, int]
@@ -48,7 +47,7 @@ def exterior_surface_area(cubes: set[Cube]) -> int:
 
     # Apply a DFS algorithm to find cubes that are part of
     # the exterior within the given bounds (mx, my, mz) (Mx, My, Mz)
-    def in_bound(cube: Cube) -> bool:
+    def in_bounds(cube: Cube) -> bool:
         mins = (mx, my, mz)
         maxs = (Mx, My, Mz)
         return all(mins[i] <= cube[i] <= maxs[i] for i in range(3))
@@ -58,7 +57,7 @@ def exterior_surface_area(cubes: set[Cube]) -> int:
 
     while stack:
         cube = stack.pop()
-        if cube in exterior or cube in cubes or not in_bound(cube):
+        if cube in exterior or cube in cubes or not in_bounds(cube):
             continue
 
         exterior.add(cube)
