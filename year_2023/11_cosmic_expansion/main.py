@@ -9,20 +9,14 @@ def read_inputs(filepath):
     galaxies = []
     with open(filepath) as file:
         image = list(map(list, file.read().strip().splitlines()))
-
-        for r, row in enumerate(image):
-            if set(row) == {"."}:
-                empty_rows.append(r)
-
-        for c, col in enumerate(zip(*image)):
-            if set(col) == {"."}:
-                empty_cols.append(c)
-
-        for r, row in enumerate(image):
-            for c, ch in enumerate(row):
-                if ch == "#":
-                    galaxies.append((r, c))
-
+        empty_rows = [r for r, row in enumerate(image) if set(row) == {"."}]
+        empty_cols = [c for c, col in enumerate(zip(*image)) if set(col) == {"."}]
+        galaxies = [
+            (r, c)
+            for r, row in enumerate(image)
+            for c, ch in enumerate(row)
+            if ch == "#"
+        ]
         return galaxies, empty_rows, empty_cols
 
 
