@@ -32,6 +32,7 @@ def part1(filepath):
         points.append((x + dx * dist, y + dy * dist))
 
     polygon = Polygon(points)
+    # Shoelace used to compute polygon.area and Pick's theorem to count the number of points inside the polygon
     return int(polygon.area + n / 2 + 1)
 
 
