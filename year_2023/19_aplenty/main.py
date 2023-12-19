@@ -1,54 +1,57 @@
 # https://adventofcode.com/2023/day/19
 
+import re
 from collections import defaultdict
 from math import prod
+from typing import Union
+
+Workflow = list[tuple[Union[str, None], str]]
+Workflows = dict[str, Workflow]
+
+Rating = dict[str, int]
+Ratings = list[Rating]
 
 
-def read_inputs(filepath):
+def read_inputs(filepath) -> tuple[Workflows, Ratings]:
     workflows = defaultdict(list)
     ratings = []
 
     with open(filepath) as file:
         wblock, rblock = file.read().strip().split("\n\n")
-        for wstr in wblock.split("\n"):
-            name, _, rules = wstr.strip().partition("{")
-            rules = [rule.strip() for rule in rules[:-1].split(",")]
-            for rule in rules:
-                if ":" in rule:
-                    expr, _, next_step = rule.partition(":")
-                    workflows[name].append((expr, next_step))
-                else:
-                    workflows[name].append((None, rule))
+
+        for wstr in wblock.splitlines():
+            name, _, rules_str = wstr.strip()[:-1].partition("{")
+            rules = rules_str.split(",")
+
+            fallback = rules.pop()
+            workflows[name] = [
+                (expr, next_step)
+                for expr, _, next_step in (rule.partition(":") for rule in rules)
+            ]
+            workflows[name].append((None, fallback))
 
         for rstr in rblock.splitlines():
             rstr = rstr.strip()
             rating = {
                 name: int(value)
-                for name, _, value in (
-                    part.partition("=") for part in rstr[1:-1].split(",")
-                )
+                for name, value in (part.split("=") for part in rstr[1:-1].split(","))
             }
             ratings.append(rating)
 
     return workflows, ratings
 
 
-def do_workflow(workflows, rating):
+def accept_rating(workflows: Workflows, rating: Rating) -> bool:
     step = "in"
-
     while step not in ("A", "R"):
         rules = workflows[step]
-        for expr, next_step in rules:
-            if expr is None:
-                step = next_step
-                break
-            elif eval(expr, rating):
-                step = next_step
-                break
+        step = next(
+            next_step for expr, next_step in rules if expr is None or eval(expr, rating)
+        )
     return step == "A"
 
 
-def negate(expr):
+def negate(expr: str) -> str:
     key, op, n = expr.partition(expr[1])
     if op == "<":
         return key + ">" + str(int(n) - 1)
@@ -56,8 +59,8 @@ def negate(expr):
         return key + "<" + str(int(n) + 1)
 
 
-# Use DFS to find all paths that lead to "A".
-def find_all_success_paths(workflows):
+# Use DFS to find all paths that lead to an "A".
+def find_all_success_paths(workflows: Workflows) -> list[tuple[str, tuple[str]]]:
     # Keeping track of the whole path is not needed. We could keep track of the last step only.
     # Doing this for debugging purposes.
     stack = [("True", ("in",))]
@@ -87,18 +90,18 @@ def find_all_success_paths(workflows):
     return paths
 
 
-def part1(filepath):
+def part1(filepath) -> int:
     workflows, ratings = read_inputs(filepath)
 
     total = 0
     for rating in ratings:
-        if do_workflow(workflows, rating):
+        if accept_rating(workflows, rating):
             total += rating["x"] + rating["m"] + rating["a"] + rating["s"]
 
     return total
 
 
-def part2(filepath):
+def part2(filepath) -> int:
     workflows, _ = read_inputs(filepath)
     paths = find_all_success_paths(workflows)
 
@@ -109,10 +112,11 @@ def part2(filepath):
         intervals = {key: (1, 4000) for key in "xmas"}
         for part in expr.split(" and "):
             key, op, n = part.partition(part[1])
+            lo, hi = intervals[key]
             if op == "<":
-                intervals[key] = (intervals[key][0], int(n) - 1)
+                intervals[key] = (lo, int(n) - 1)
             else:
-                intervals[key] = (int(n) + 1, intervals[key][1])
+                intervals[key] = (int(n) + 1, hi)
 
         # Get the number of combinations of ratings.
         total += prod(hi - lo + 1 for lo, hi in intervals.values())
