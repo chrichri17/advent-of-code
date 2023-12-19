@@ -1,7 +1,5 @@
 # https://adventofcode.com/2023/day/19
 
-import re
-from collections import defaultdict
 from math import prod
 from typing import Union
 
@@ -13,7 +11,7 @@ Ratings = list[Rating]
 
 
 def read_inputs(filepath) -> tuple[Workflows, Ratings]:
-    workflows = defaultdict(list)
+    workflows = {}
     ratings = []
 
     with open(filepath) as file:
@@ -70,10 +68,10 @@ def find_all_success_paths(workflows: Workflows) -> list[tuple[str, tuple[str]]]
         expr, path = stack.pop()
         curr = path[-1]
 
+        if curr == "R":
+            continue
         if curr == "A":
             paths.append((expr.removeprefix("True and "), path))
-            continue
-        elif curr == "R":
             continue
 
         rules = workflows[curr]
@@ -82,10 +80,10 @@ def find_all_success_paths(workflows: Workflows) -> list[tuple[str, tuple[str]]]
         for nexpr, next_step in rules:
             if nexpr is None:
                 stack.append((curr_expr, path + (next_step,)))
-            else:
-                stack.append((curr_expr + " and " + nexpr, path + (next_step,)))
-                # negate nexpr because at the next iteration, it would mean that we chosed the failure path.
-                curr_expr = curr_expr + " and " + negate(nexpr)
+                continue
+            stack.append((curr_expr + " and " + nexpr, path + (next_step,)))
+            # negate nexpr because at the next iteration, it would mean that we chosed the failure path.
+            curr_expr = curr_expr + " and " + negate(nexpr)
 
     return paths
 
