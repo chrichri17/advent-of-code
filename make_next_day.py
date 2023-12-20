@@ -30,9 +30,17 @@ def read_inputs(filepath):
             yield line.strip()
 
 
+def part1(filepath):
+    pass
+
+
+def part2(filepath):
+    pass
+
+
 def main(filepath):
-    print("Part 1:", )
-    print("Part 2:", )
+    print("Part 1:", part1(filepath))
+    print("Part 2:", part2(filepath))
 """
 
 
