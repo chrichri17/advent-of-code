@@ -1,3 +1,5 @@
+# https://adventofcode.com/2023/day/22
+
 from collections import defaultdict, deque, namedtuple
 from dataclasses import dataclass
 
@@ -16,6 +18,16 @@ class Brick:
 
     def __post_init__(self):
         assert (self.sx, self.sy, self.sz) <= (self.ex, self.ey, self.ez)
+        equals = [self.sx == self.ex, self.sy == self.ey, self.sz == self.ez]
+        assert equals.count(True) >= 2
+
+    def intersect_with(self, other: "Brick") -> bool:
+        return not (
+            self.ex < other.sx
+            or other.ex < self.sx
+            or self.ey < other.sy
+            or other.ey < self.sy
+        )
 
 
 def read_inputs(filepath):
@@ -28,15 +40,11 @@ def read_inputs(filepath):
         return bricks
 
 
-def overlaps(a: Brick, b: Brick) -> bool:
-    return not (a.ex < b.sx or b.ex < a.sx or a.ey < b.sy or b.ey < a.sy)
-
-
 def fall_bricks_downward(bricks: list[Brick]):
     for i in range(len(bricks)):
-        new_z = 1  # How much we can fall down
+        new_z = 0  # How much we can fall down
         for j in range(i):
-            if overlaps(bricks[j], bricks[i]):
+            if bricks[i].intersect_with(bricks[j]):
                 new_z = max(new_z, bricks[j].ez + 1)
         bricks[i].ez -= bricks[i].sz - new_z
         bricks[i].sz = new_z
@@ -53,7 +61,7 @@ def get_dependency_graph(
     for i, child in enumerate(bricks):
         for j in range(i):
             parent = bricks[j]
-            if overlaps(parent, child) and child.sz - 1 == parent.ez:
+            if child.intersect_with(parent) and child.sz - 1 == parent.ez:
                 parents[child.marker].add(parent.marker)
                 children[parent.marker].add(child.marker)
 
