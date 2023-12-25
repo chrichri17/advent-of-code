@@ -1,0 +1,9 @@
+test.txt
+--------
+Part 1: 54
+Part 2: 🎉🎉🎉 Year 2023 done 🎉🎉🎉
+
+in.txt
+------
+Part 1: 547080
+Part 2: 🎉🎉🎉 Year 2023 done 🎉🎉🎉
