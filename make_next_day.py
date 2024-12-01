@@ -24,6 +24,13 @@ files = [
 ]
 
 main_template = """
+# https://adventofcode.com/{year}/day/{day}
+import re
+from collection import defaultdict, dequeue, Counter
+from math import prod, lcm, gcd
+import heapq
+
+
 def read_inputs(filepath):
     with open(filepath) as file:
         for line in file.readlines():
@@ -57,7 +64,7 @@ def main():
         p.touch()
 
     with open(base_dir / "main.py", "w") as main_file:
-        main_file.write(main_template)
+        main_file.write(main_template.format(year=args.year, day=args.day))
 
 
 if __name__ == "__main__":

@@ -2,3 +2,9 @@ __pycache__
 .vscode
 venv
 .envrc
+
+
+## Ignore files using for quick testing and submissions
+solution.py
+/in.txt
+/test.txt
