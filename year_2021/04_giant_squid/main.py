@@ -7,6 +7,12 @@ class Cell:
     value: int
     marked: bool = False
 
+    def __repr__(self) -> str:
+        if self.marked:
+            # Print in bold and cyan if the cell is marked
+            return f"\033[1m\033[96m{self.value:2d}\033[0m"
+        return f"{self.value:2d}"
+
 
 @dataclass
 class Board:
@@ -27,9 +33,7 @@ class Board:
         return sum(cell.value for row in self.rows for cell in row if not cell.marked)
 
     def __repr__(self) -> str:
-        return "\n".join(
-            " ".join(f"{cell.value:2d}" for cell in row) for row in self.rows
-        )
+        return "\n".join(" ".join(str(cell) for cell in row) for row in self.rows)
 
 
 def read_inputs(filepath):
@@ -52,6 +56,7 @@ def part1(filepath):
         for board in boards:
             board.mark_cells(num)
             if board.is_winning():
+                # print(board)
                 return num * board.sum_unmarked()
 
 
