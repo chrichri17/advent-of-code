@@ -1,0 +1,9 @@
+test.txt
+--------
+Part 1: 4512
+Part 2: 1924
+
+in.txt
+------
+Part 1: 8580
+Part 2: 9576
