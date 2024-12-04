@@ -6,5 +6,5 @@ venv
 
 ## Ignore files using for quick testing and submissions
 solution.py
-/in.txt
+in.txt
 /test.txt
