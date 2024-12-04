@@ -26,7 +26,7 @@ files = [
 main_template = """
 # https://adventofcode.com/{year}/day/{day}
 import re
-from collections import defaultdict, dequeue, Counter
+from collections import defaultdict, deque, Counter
 from math import prod, lcm, gcd
 import heapq
 
