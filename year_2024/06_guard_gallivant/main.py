@@ -28,12 +28,6 @@ class Directions:
         return self.vectors[self.directions[self.pos]]
 
 
-def display_dir(dr, dc):
-    for direction, (r, c) in Directions.vectors.items():
-        if (r, c) == (dr, dc):
-            return direction
-
-
 def patrol(grid, start):
     nr, nc = len(grid), len(grid[0])
     directions = Directions()
