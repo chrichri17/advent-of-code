@@ -64,10 +64,12 @@ def part1(filepath):
 # A bit faster with pypy
 def part2(filepath):
     grid, start, (nr, nc) = read_inputs(filepath)
+    # (tips from @hyperneutrino): to make it faster, place obstacles on the guard path only: 32s -> 7s
+    seen, _ = patrol(grid, start)
     count = 0
     for r in range(nr):
         for c in range(nc):
-            if grid[r][c] != ".":
+            if grid[r][c] != "." or (r, c) not in seen:
                 continue
             grid[r][c] = "#"
             _, has_loop = patrol(grid, start)
