@@ -1,8 +1,5 @@
 # https://adventofcode.com/2024/day/11
-import re
-from collections import defaultdict, deque, Counter
-from math import prod, lcm, gcd
-import heapq
+from collections import Counter
 
 
 def read_inputs(filepath):
