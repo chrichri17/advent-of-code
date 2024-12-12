@@ -8,7 +8,7 @@ def read_inputs(filepath):
         return file.read().strip().splitlines()
 
 
-Point = namedtuple("Point", ["x", "y"])
+Point = namedtuple("Point", ["r", "c"])
 
 
 @dataclass
@@ -44,12 +44,12 @@ class Region:
         for pos, rb in self.rbounds.items():
             count = 1
             rb = sorted(rb)
-            for i in range(1, len(rb)):
+            for p1, p2 in zip(rb, rb[1:]):
                 # new row => increase side count
-                if rb[i][0] != rb[i - 1][0]:
+                if p2.r != p1.r:
                     count += 1
                 # same row but not adjacent (i.e holes) => increase side count
-                elif rb[i][1] - rb[i - 1][1] > 1:
+                elif p2.c - p1.c > 1:
                     count += 1
             sides[pos] = count
         return sides
@@ -58,13 +58,13 @@ class Region:
         sides = {}  # using dict for debugging purposes. We could just store the count
         for pos, cb in self.cbounds.items():
             count = 1
-            cb = sorted(cb, key=lambda x: (x[1], x[0]))
-            for i in range(1, len(cb)):
+            cb = sorted(cb, key=lambda p: (p.c, p.r))
+            for p1, p2 in zip(cb, cb[1:]):
                 # new column => increase side count
-                if cb[i][1] != cb[i - 1][1]:
+                if p2.c != p1.c:
                     count += 1
                 # same column but not adjacent (i.e holes) => increase side count
-                elif cb[i][0] - cb[i - 1][0] > 1:
+                elif p2.r - p1.r > 1:
                     count += 1
             sides[pos] = count
         return sides
@@ -95,17 +95,17 @@ def get_regions(grid) -> list[Region]:
                 for dr, dc in directions:
                     nr, nc = cr + dr, cc + dc
                     if nr < 0 or nr >= nrows:
-                        rbounds[nr].add((cr, cc))
+                        rbounds[nr].add(Point(cr, cc))
                     elif nc < 0 or nc >= ncols:
-                        cbounds[nc].add((cr, cc))
+                        cbounds[nc].add(Point(cr, cc))
                     elif grid[nr][nc] != crop:
                         if dr == 0:
-                            cbounds[nc].add((cr, cc))
+                            cbounds[nc].add(Point(cr, cc))
                         else:
-                            rbounds[nr].add((cr, cc))
+                            rbounds[nr].add(Point(cr, cc))
                     else:
                         Q.append((nr, nc))
-                        points.add((nr, nc))
+                        points.add(Point(nr, nc))
 
             regions.append(Region(crop, points, rbounds, cbounds))
 
