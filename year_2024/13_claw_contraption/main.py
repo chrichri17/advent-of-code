@@ -10,6 +10,8 @@ def read_inputs(filepath):
 
 
 def count_tokens(x1, y1, x2, y2, x, y):
+    # Solve the system using Cramer's rule
+    # See https://en.wikipedia.org/wiki/Cramer%27s_rule#Explicit_formulas_for_small_systems
     determinant = x1 * y2 - x2 * y1
     if determinant == 0:
         return 0
