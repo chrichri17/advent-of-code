@@ -81,14 +81,14 @@ def part1(filepath):
 # while a
 #
 # We can reverse engineer the program to find the value of A that will output the program itself.
-# We need to start from the end value which is 0 (last printed value, i.e b % 8, is 0)
+# We need to start from the end value which is 0 (last printed value, i.e B % 8, is 0)
 #
 # This means that if we want last printed value to be 0,
-# then we need to find the value of A that will go through the above program and print b % 8 == 0
-# A here must be in range 0-7 because (1) last A must be 0 and (2) A >> 3 is used in the program
+# then we need to find the value of A that will go through the above program and print B % 8 == 0
+# A here must be in range 0-7 because (1) last A must be 0 and (2) in the last iteration, A = A >> 3 returns 0 only if A is in range 0-7
 # A simple brute force approach (range 0-7) shows that A = 6.
 #
-# Then we now know that the loop before would have an A such that A >> 3 == 6
+# Then we now know that the iteration before (n-1) would have an A such that A >> 3 == 6 (so that iteration n yield A == 6 AND B % 8 == 0)
 # We can now reverse engineer again to find the right value of A within (6 << 3) and (6 << 3) + 7 (these are the possible A for which A >> 3 == 6)
 # that validate against the program and print b % 8 == 3
 #
