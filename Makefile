@@ -3,8 +3,8 @@
 aot:
 	@python3 main.py -i test
 
-.PHONY: aoi
-aoi:
+.PHONY: aos
+aos:
 	@python3 main.py -i in
 
 .PHONY: aoc

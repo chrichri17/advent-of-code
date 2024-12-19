@@ -1,7 +1,7 @@
 import argparse
-import utils
-
 from pathlib import Path
+
+import utils
 
 
 def parse_args():
