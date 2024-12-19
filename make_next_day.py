@@ -23,12 +23,13 @@ files = [
     "data/out.txt",
 ]
 
-main_template = """
+boilerplate = """
 # https://adventofcode.com/{year}/day/{day}
-import re
-from collections import defaultdict, deque, Counter
-from math import prod, lcm, gcd
+
 import heapq
+import re
+from collections import Counter, defaultdict, deque
+from math import gcd, lcm, prod
 
 
 def read_inputs(filepath):
@@ -37,17 +38,18 @@ def read_inputs(filepath):
             yield line.strip()
 
 
-def part1(filepath):
+def part1(inputs):
     pass
 
 
-def part2(filepath):
+def part2(inputs):
     pass
 
 
 def main(filepath):
-    print("Part 1:", part1(filepath))
-    print("Part 2:", part2(filepath))
+    inputs = read_inputs(filepath)
+    print("Part 1:", part1(inputs))
+    print("Part 2:", part2(inputs))
 """
 
 
@@ -64,7 +66,7 @@ def main():
         p.touch()
 
     with open(base_dir / "main.py", "w") as main_file:
-        main_file.write(main_template.format(year=args.year, day=args.day))
+        main_file.write(boilerplate.format(year=args.year, day=args.day))
 
 
 if __name__ == "__main__":
