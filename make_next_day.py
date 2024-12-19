@@ -7,13 +7,15 @@ import utils
 def parse_args():
     parser = argparse.ArgumentParser()
     last_year = utils.get_last_year()
-    last_day = int(utils.get_last_day(last_year))
-    next_day = f"{last_day + 1:02d}"
 
     parser.add_argument("name")
     parser.add_argument("-y", "--year", default=last_year)
-    parser.add_argument("-d", "--day", default=next_day)
-    return parser.parse_args()
+    parser.add_argument("-d", "--day", default="")
+
+    args = parser.parse_args()
+    last_day = int(utils.get_last_day(args.year))
+    args.day = f"{last_day + 1:02d}"
+    return args
 
 
 files = [
