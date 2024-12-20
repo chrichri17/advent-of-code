@@ -13,8 +13,9 @@ def parse_args():
     parser.add_argument("-d", "--day", default="")
 
     args = parser.parse_args()
-    last_day = int(utils.get_last_day(args.year))
-    args.day = f"{last_day + 1:02d}"
+    if not args.day:
+        last_day = int(utils.get_last_day(args.year))
+        args.day = f"{last_day + 1:02d}"
     return args
 
 
