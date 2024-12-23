@@ -12,11 +12,11 @@ def read_inputs(filepath):
 def part1(filepath):
     G = read_inputs(filepath)
     triplets = set()
-    for node in G.nodes:
-        for n1 in G[node]:
+    for n in G.nodes:
+        for n1 in G[n]:
             for n2 in G[n1]:
-                if n2 in G[node] and (node[0] == "t" or n1[0] == "t" or n2[0] == "t"):
-                    triplets.add(tuple(sorted([node, n1, n2])))
+                if n2 in G[n] and (n[0] == "t" or n1[0] == "t" or n2[0] == "t"):
+                    triplets.add(tuple(sorted([n, n1, n2])))
     return len(triplets)
 
 
