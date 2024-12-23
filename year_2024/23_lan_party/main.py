@@ -21,8 +21,8 @@ def part1(filepath):
 
 
 def part2(filepath):
-    cliques = nx.find_cliques(read_inputs(filepath))
-    return ",".join(sorted(max(cliques, key=len)))
+    clique, _ = nx.max_weight_clique(read_inputs(filepath), weight=None)
+    return ",".join(sorted(clique))
 
 
 def main(filepath):
