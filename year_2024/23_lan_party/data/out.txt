@@ -1,0 +1,9 @@
+test.txt
+--------
+Part 1: 7
+Part 2: co,de,ka,ta
+
+in.txt
+------
+Part 1: 1337
+Part 2: aw,fk,gv,hi,hp,ip,jy,kc,lk,og,pj,re,sr
