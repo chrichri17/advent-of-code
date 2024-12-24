@@ -1,0 +1,4 @@
+in.txt
+------
+Part 1: 53325321422566
+Part 2: fkb,nnr,rdn,rrn,z16,z31,z37,z45
