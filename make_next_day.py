@@ -68,7 +68,7 @@ def main():
         p.touch()
 
     with open(base_dir / "main.py", "w") as main_file:
-        main_file.write(boilerplate.format(year=args.year, day=args.day))
+        main_file.write(boilerplate.format(year=args.year, day=int(args.day)))
 
 
 if __name__ == "__main__":

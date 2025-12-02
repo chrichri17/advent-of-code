@@ -1,4 +1,4 @@
-# https://adventofcode.com/2025/day/02
+# https://adventofcode.com/2025/day/2
 
 Range = tuple[int, ...]
 

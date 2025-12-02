@@ -1,4 +1,4 @@
-# https://adventofcode.com/2015/day/04
+# https://adventofcode.com/2015/day/4
 
 from hashlib import md5
 

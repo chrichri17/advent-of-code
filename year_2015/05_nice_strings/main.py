@@ -1,4 +1,4 @@
-# https://adventofcode.com/2015/day/05
+# https://adventofcode.com/2015/day/5
 
 from collections import Counter
 from string import ascii_lowercase

@@ -1,4 +1,4 @@
-# https://adventofcode.com/2024/day/09
+# https://adventofcode.com/2024/day/9
 from dataclasses import dataclass
 from typing import Iterator
 

@@ -1,4 +1,4 @@
-# https://adventofcode.com/2021/day/06
+# https://adventofcode.com/2021/day/6
 from collections import Counter, defaultdict
 
 

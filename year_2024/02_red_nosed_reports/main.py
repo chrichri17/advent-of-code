@@ -1,4 +1,4 @@
-# https://adventofcode.com/2024/day/02
+# https://adventofcode.com/2024/day/2
 
 
 def read_inputs(filepath):
