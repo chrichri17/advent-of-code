@@ -26,14 +26,14 @@ class Problem:
 
     def _get_ints(self, method="default"):
         if method == "default":
-            return list(map(int, self.numbers))
+            return map(int, self.numbers)
         elif method == "cephalopod":
             M = max(map(len, self.numbers))
             nums = [
                 "".join(num[j] for num in self.numbers if j < len(num))
                 for j in range(M)
             ]
-            return list(map(int, nums))
+            return map(int, nums)
         else:
             raise ValueError(f"Unknown method: {method}")
 
