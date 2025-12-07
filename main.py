@@ -21,6 +21,9 @@ def parse_args():
 def main():
     args = parse_args()
     module = utils.get_module(args.year, args.day)
+    if module is None:
+        print(f"Module for year {args.year} and day {args.day} not found.")
+        return
     data_dir = Path(module.__file__).parent / "data"
 
     if args.input == "all":

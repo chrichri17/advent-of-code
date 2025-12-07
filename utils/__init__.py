@@ -25,7 +25,7 @@ def get_last_day(last_year: str) -> str:
     return f"{last_day:02d}"
 
 
-def get_module(year: str, day: str) -> str:
+def get_module(year: str, day: str):
     year_dir = base_dir / f"year_{year}"
 
     for p in year_dir.iterdir():
