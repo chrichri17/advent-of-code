@@ -20,7 +20,7 @@ def find_largest_area_outside(points: list[Point]) -> int:
 
 
 # This simplifies the problem by using shapely
-# Not the real spiriti of AoC
+# Not the real spirit of AoC though
 # Hard way will be in draft.py
 def find_largest_area_inside(points: list[Point]) -> int:
     poly = Polygon(points)
