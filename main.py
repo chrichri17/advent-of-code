@@ -1,6 +1,7 @@
 import argparse
 import sys
 from contextlib import redirect_stdout
+from glob import glob
 from pathlib import Path
 
 import utils
@@ -27,9 +28,10 @@ def main():
     data_dir = Path(module.__file__).parent / "data"
 
     if args.input == "all":
-        inputs = ["test.txt", "in.txt"]
+        inputs = glob("test*.txt", root_dir=data_dir)
+        inputs.append("in.txt")
     else:
-        inputs = [f"{args.input}.txt"]
+        inputs = glob(f"{args.input}*.txt", root_dir=data_dir)
 
     cout = open(data_dir / "out.txt", "w") if args.save else sys.stdout
 
